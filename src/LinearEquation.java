@@ -40,13 +40,23 @@ public class LinearEquation {
     }
 
     public double slope() {
+        // DOESNT WORK WHEN y1 = y2
         return (double) (y2 - y1) / (x2 - x1);
+    }
+
+    public double yIntercept() {
+        return y1 - slope() * x1;
+    }
+
+    public String equation() {
+        if (y1 == y2) {
+            return "y = " + yIntercept();
+        }
+        return "y = " + (y2 - y1) + "/" + (x2 - x1) + "x + " + yIntercept();
     }
 
     private double roundedToHundredth(double toRound) {
         return Math.round(toRound * 100.0) / 100.0;
     }
-
-
 
 }
