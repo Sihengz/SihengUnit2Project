@@ -39,6 +39,10 @@ public class LinearEquation {
         return roundedToHundredth(Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2)));
     }
 
+    public double slope() {
+        return (double) (y2 - y1) / (x2 - x1);
+    }
+
     private double roundedToHundredth(double toRound) {
         return Math.round(toRound * 100.0) / 100.0;
     }
