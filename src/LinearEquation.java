@@ -36,10 +36,10 @@ public class LinearEquation {
     }
 
     public double distance() {
-        return round(Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2)));
+        return roundedToHundredth(Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2)));
     }
 
-    private double round(double toRound) {
+    private double roundedToHundredth(double toRound) {
         return Math.round(toRound * 100.0) / 100.0;
     }
 
