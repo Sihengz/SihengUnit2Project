@@ -19,14 +19,6 @@ public class LinearEquation {
         return x2;
     }
 
-    public int getY1() {
-        return y1;
-    }
-
-    public int getY2() {
-        return y2;
-    }
-
     public void setFromPoints(String point1, String point2) {
         x1 = Integer.parseInt(point1.substring(1, point1.indexOf(",")));
         y1 = Integer.parseInt(point1.substring(point1.indexOf(",") + 2, point1.indexOf(")")));
@@ -50,12 +42,18 @@ public class LinearEquation {
     public String equation() {
         if (y1 == y2) {
             return "y = " + yIntercept();
+        } else if (slope() == 1) {
+            return "y = " + "x + " + yIntercept();
+        } else if (slope() == -1) {
+            return "y = " + "-x + " + yIntercept();
+        } else if (slope() % 1 == 0) {
+            return "y = " + (int) slope() + "x + " + yIntercept();
         }
         return "y = " + (y2 - y1) + "/" + (x2 - x1) + "x + " + yIntercept();
     }
 
-    public Double coordinateForX(double x) {
-        return slope() * x + yIntercept();
+    public String coordinateForX(double x) {
+        return "(" + x + ", " + (slope() * x + yIntercept()) + ")";
     }
 
     public String lineInfo() {
