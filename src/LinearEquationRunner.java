@@ -3,5 +3,7 @@ public class LinearEquationRunner {
         LinearEquationLogic lel = new LinearEquationLogic();
         lel.start();
 
+        // Sometimes negative dont work
+
     }
 }
