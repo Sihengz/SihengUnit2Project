@@ -40,12 +40,11 @@ public class LinearEquation {
     }
 
     public double slope() {
-        // DOESNT WORK WHEN y1 = y2
-        return (double) (y2 - y1) / (x2 - x1);
+        return roundedToHundredth((double) (y2 - y1) / (x2 - x1));
     }
 
     public double yIntercept() {
-        return y1 - slope() * x1;
+        return roundedToHundredth(y1 - slope() * x1);
     }
 
     public String equation() {
@@ -53,6 +52,20 @@ public class LinearEquation {
             return "y = " + yIntercept();
         }
         return "y = " + (y2 - y1) + "/" + (x2 - x1) + "x + " + yIntercept();
+    }
+
+    public Double coordinateForX(double x) {
+        return slope() * x + yIntercept();
+    }
+
+    public String lineInfo() {
+        String returnString = "";
+        returnString += "The two points are: " + "(" + x1 + ", " + y1 + ")" + " and (" + x2 + ", " + y2 + ")\n";
+        returnString += "The equation of the line between these points is: " + equation() + "\n";
+        returnString += "The slope of this line is: " + slope() + "\n";
+        returnString += "The y-intercept of this line is: " + yIntercept() + "\n";
+        returnString += "The distance between these two points is: " + distance() + "\n";
+        return returnString;
     }
 
     private double roundedToHundredth(double toRound) {
