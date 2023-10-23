@@ -78,6 +78,7 @@ public class LinearEquation {
         }
         String operation = " + ";
         System.out.println("SDUIUHSDUHSDUH");
+        // fix!
 
         if (yIntercept() < 0) {
             operation = " - ";
