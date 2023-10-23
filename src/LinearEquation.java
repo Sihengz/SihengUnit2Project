@@ -23,7 +23,7 @@ public class LinearEquation {
         x1 = Integer.parseInt(point1.substring(1, point1.indexOf(",")));
         y1 = Integer.parseInt(point1.substring(point1.indexOf(",") + 2, point1.indexOf(")")));
         x2 = Integer.parseInt(point2.substring(1, point2.indexOf(",")));
-        y2 = Integer.parseInt(point2.substring(point2.indexOf(",") + 2, point1.indexOf(")")));
+        y2 = Integer.parseInt(point2.substring(point2.indexOf(",") + 2, point2.indexOf(")")));
 
     }
 
@@ -36,20 +36,68 @@ public class LinearEquation {
     }
 
     public double yIntercept() {
+        if (roundedToHundredth(y1 - slope() * x1)  % 1 == 0) {
+            return (int) (Math.round(roundedToHundredth(y1 - slope() * x1)));
+
+        }
+
         return roundedToHundredth(y1 - slope() * x1);
+
     }
 
     public String equation() {
+        double y_inter = yIntercept();
         if (y1 == y2) {
-            return "y = " + yIntercept();
+            return "y = " + y_inter;
         } else if (slope() == 1) {
-            return "y = " + "x + " + yIntercept();
+            return "y = " + "x + " + y_inter;
         } else if (slope() == -1) {
-            return "y = " + "-x + " + yIntercept();
+            return "y = " + "-x + " + y_inter;
         } else if (slope() % 1 == 0) {
-            return "y = " + (int) slope() + "x + " + yIntercept();
+            return "y = " + (int) slope() + "x + " + y_inter;
         }
-        return "y = " + (y2 - y1) + "/" + (x2 - x1) + "x + " + yIntercept();
+        int denom = (x2 - x1);
+        int numer = (y2 - y1);
+
+        if (y_inter == 0) {
+            if (y1 == y2) {
+                return "y = 0";
+            } else if (slope() == 1) {
+                return "y = " + "x";
+            } else if (slope() == -1) {
+                return "y = " + "-x";
+            } else if (slope() % 1 == 0) {
+                return "y = " + (int) slope() + "x";
+            }
+            if (denom < 0 && numer > 0) {
+                return "y = " + (numer * -1) + "/" + (denom * -1) + "x";
+            } else if (denom < 0 && numer < 0) {
+                return "y = " + (numer * -1) + "/" + (denom * -1) + "x";
+            }
+
+        }
+        String operation = " + ";
+        System.out.println("SDUIUHSDUHSDUH");
+
+        if (yIntercept() < 0) {
+            operation = " - ";
+            y_inter = yIntercept() * -1;
+        }
+        if (y1 == y2) {
+            return "y = " + y_inter;
+        } else if (slope() == 1) {
+            return "y = " + "x" + operation + y_inter;
+        } else if (slope() == -1) {
+            return "y = " + "-x" + operation + yIntercept();
+        } else if (slope() % 1 == 0) {
+            return "y = " + (int) slope() + "x" + operation + yIntercept();
+        }
+        if (denom < 0 && numer > 0) {
+            return "y = " + (numer * -1) + "/" + (denom * -1) + "x" + operation + yIntercept();
+        } else if (denom < 0 && numer < 0) {
+            return "y = " + (numer * -1) + "/" + (denom * -1) + "x" + operation + yIntercept();
+        }
+        return "y = " + numer + "/" + denom + "x" + operation + yIntercept();
     }
 
     public String coordinateForX(double x) {
@@ -69,5 +117,4 @@ public class LinearEquation {
     private double roundedToHundredth(double toRound) {
         return Math.round(toRound * 100.0) / 100.0;
     }
-
 }
