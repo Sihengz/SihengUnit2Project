@@ -10,6 +10,13 @@ public class LinearEquation {
         y2 = Integer.parseInt(point2.substring(point2.indexOf(",") + 2, point1.indexOf(")")));
 
     }
+    public LinearEquation(int x1, int y1, int x2, int y2) {
+        this.x1 = x1;
+        this.x2 = x2;
+        this.y1 = y1;
+        this.y2 = y2;
+
+    }
 
     public int getX1() {
         return x1;
@@ -47,7 +54,7 @@ public class LinearEquation {
 
     public String equation() {
         double y_inter = yIntercept();
-        if (y1 == y2) {
+        if ((y1 == y2) && (y_inter != 0)) {
             return "y = " + y_inter;
         } else if (slope() == 1) {
             return "y = " + "x + " + y_inter;
@@ -58,7 +65,6 @@ public class LinearEquation {
         }
         int denom = (x2 - x1);
         int numer = (y2 - y1);
-
         if (y_inter == 0) {
             if (y1 == y2) {
                 return "y = 0";
@@ -75,31 +81,41 @@ public class LinearEquation {
                 return "y = " + (numer * -1) + "/" + (denom * -1) + "x";
             }
 
+
         }
         String operation = " + ";
-        System.out.println("SDUIUHSDUHSDUH");
-        // fix!
 
         if (yIntercept() < 0) {
             operation = " - ";
             y_inter = yIntercept() * -1;
         }
-        if (y1 == y2) {
+        if ((y1 == y2) && (y_inter != 0)) {
             return "y = " + y_inter;
         } else if (slope() == 1) {
             return "y = " + "x" + operation + y_inter;
         } else if (slope() == -1) {
-            return "y = " + "-x" + operation + yIntercept();
+            return "y = " + "-x" + operation + y_inter;
         } else if (slope() % 1 == 0) {
-            return "y = " + (int) slope() + "x" + operation + yIntercept();
+            return "y = " + (int) slope() + "x" + operation + y_inter;
         }
-        if (denom < 0 && numer > 0) {
-            return "y = " + (numer * -1) + "/" + (denom * -1) + "x" + operation + yIntercept();
-        } else if (denom < 0 && numer < 0) {
-            return "y = " + (numer * -1) + "/" + (denom * -1) + "x" + operation + yIntercept();
+        if ((denom < 0 && numer > 0) || (denom < 0 && numer < 0)) {
+            return "y = " + (numer * -1) + "/" + (denom * -1) + "x" + operation + y_inter;
         }
-        return "y = " + numer + "/" + denom + "x" + operation + yIntercept();
+        if ((y1 == y2) && (y_inter == 0)) {
+            return "y = ";
+        } else if (slope() == 1) {
+            return "y = " + "x";
+        } else if (slope() == -1) {
+            return "y = " + "-x";
+        } else if (slope() % 1 == 0) {
+            return "y = " + (int) slope() + "x";
+        }
+        if ((denom < 0 && numer > 0) || (denom < 0 && numer < 0)) {
+            return "y = " + (numer * -1) + "/" + (denom * -1) + "x";
+        }
+        return "y = " + numer + "/" + denom + "x";
     }
+
 
     public String coordinateForX(double x) {
         return "(" + x + ", " + (slope() * x + yIntercept()) + ")";
